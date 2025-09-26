@@ -9,7 +9,7 @@ object bumblebee {
     method peso() = 800
     method transformarEnAuto() {
         peligrosidad = 15
-    } 
+    }
     method transformarEnRobot() {
         peligrosidad = 30
     }
@@ -64,11 +64,13 @@ object contenedorPortuario {
     }
 }
 
+//Residuos radioactivos: el peso es variable y su peligrosidad es 200.
 object residuosRadiactivos {
     method peso() =
     method peligrosidad() =
 }
 
+//Embalaje de seguridad: es una cobertura que envuelve a cualquier otra cosa. El peso es el peso de la cosa que tenga adentro. El nivel de peligrosidad es la mitad del nivel de peligrosidad de lo que envuelve.
 object embalajeDeSeguridad {
     method peso() =
     method peligrosidad() =
