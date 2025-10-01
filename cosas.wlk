@@ -26,7 +26,6 @@ object paqueteDeLadrillos {
 //Arena a granel: el peso es variable, la peligrosidad es 1.
 object arenaAGranel{
     var cantidad = 10
-
     method nuevaCantidad(unaCantidad){
         cantidad = unaCantidad
     }
@@ -52,26 +51,48 @@ object bateriaAntiaerea {
 object contenedorPortuario {
     const cosas = []
     method peso() = 100 + cosas.sum({c => c.peso()})
-    method peligrosidad() {
-        return self.cosaMasPeligrosa().peligrosidad()
+    method peligrosidad(){
+        if (cosas.isEmpty()){
+            return 0 
+        } else {
+            return cosas.max({c => c.peligrosidad()}).peligrosidad()
+        }
     }
+
+    method cargarContenedor(unaCosa){
+        cosas.add(unaCosa)
+    }
+
+    method descargarContenedor(unaCosa){
+        cosas.remove(unaCosa)
+    }
+    /*
     method cosaMasPeligrosa() {
         if (cosas.isEmpty()){
            return 0 
         } else {
-            return cosas.max({c => c.peligrosidad()})
+            return cosas.max({c => c.peligrosidad()}).peligrosidad()
         }
-    }
+    }*/
 }
 
 //Residuos radioactivos: el peso es variable y su peligrosidad es 200.
 object residuosRadiactivos {
-    method peso() =
-    method peligrosidad() =
+    var property peso = 10
+
+    method nuevoPeso(unPeso) {
+        peso = unPeso
+    }
+    method peligrosidad() = 200
 }
 
 //Embalaje de seguridad: es una cobertura que envuelve a cualquier otra cosa. El peso es el peso de la cosa que tenga adentro. El nivel de peligrosidad es la mitad del nivel de peligrosidad de lo que envuelve.
 object embalajeDeSeguridad {
-    method peso() =
-    method peligrosidad() =
+    var embalado = residuosRadiactivos
+    method peso() = embalado.peso()
+    method peligrosidad() = embalado.peligrosidad() / 2
+
+    method embalar(unaCosa) {
+        embalado = unaCosa
+    }
 }

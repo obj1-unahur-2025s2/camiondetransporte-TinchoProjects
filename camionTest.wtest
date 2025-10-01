@@ -1,9 +1,17 @@
+import cosas.*
 import camion.*
 
 describe "group of test for camion" {
 
-  test "first test" {
-    assert.that(true)
+  test "Preparar camion con paquete de ladrillos, batería antiaérea, contenedor portuario y embalaje de seguridad. Al embalaje ponerle adentro los residuos radioactivos con 30 kg de peso. Al contenedor, dos o tres cosas a elección." {
+    camion.cargarCamion(paqueteDeLadrillos)
+    camion.cargarCamion(bateriaAntiaerea)
+    contenedorPortuario.cargarContenedor(bumblebee)
+    camion.cargarCamion(contenedorPortuario)
+    residuosRadiactivos.nuevoPeso(30)
+    embalajeDeSeguridad.embalar(residuosRadiactivos)
+    camion.cargarCamion(embalajeDeSeguridad)
+    assert.equals(2250 , camion.peso())
   }
 
 }
